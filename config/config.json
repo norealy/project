@@ -1,0 +1,23 @@
+{
+  "development": {
+  "username": "postgres",
+  "password": "Claydeptrai001",
+  "database": "blogdb",
+  "host": "localhost",
+  "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "Claydeptrai001",
+    "database": "blogdb",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production":  {
+    "username": "postgres",
+    "password": "Claydeptrai001",
+    "database": "blogdb",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}

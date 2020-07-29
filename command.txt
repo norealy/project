@@ -1,0 +1,11 @@
+systemctl restart postgresql
+npx sequelize-cli db:drop
+npx sequelize-cli db:create blogdb
+npx sequelize-cli db:migrate
+
+
+posts/
+posts/me
+posts/search/tag
+posts/search/title
+posts/Postarticle

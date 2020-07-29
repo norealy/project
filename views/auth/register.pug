@@ -1,0 +1,24 @@
+extends ../layouts/header.pug
+block content
+
+    if errors
+        each error in errors
+            alert.alert-danger= error
+    form.ml-auto(action='/auth/register', method="POST")
+        .form-group
+            label(for='fullname') Fullname :
+            input#user.form-control(type='text', placeholder='Enter fullname',name='fullname',value=values ? values.email : "")
+        .form-group
+            label(for='username') username :
+            input#user.form-control(type='text', placeholder='Enter username',name='username',value=values ? values.email : "")
+        .form-group
+            label(for='email') email :
+            input#email.form-control(type='email', placeholder='Enter email',name='email',value=values ? values.email : "")
+        .form-group
+            label(for='password') password:
+            input#pwd.form-control(type='password', placeholder='Enter password',name='password',value=values ? values.password : "")
+        .form-group.form-check
+            label.form-check-label
+            input.form-check-input(type='checkbox',checked=true)
+            |  Remember me
+        button.btn.btn-primary(type='submit') Register

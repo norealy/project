@@ -1,0 +1,91 @@
+link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css', rel='stylesheet')
+script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+// ---- Include the above in your HEAD tag --------
+link(href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', rel='stylesheet', integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN', crossorigin='anonymous')
+script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
+nav.navbar.navbar-light.bg-white
+  if(user)
+    a.navbar-brand(href='/') Home Blog
+  form.form-inline
+    .input-group
+      input.form-control(type='text', aria-label="Recipient's username", aria-describedby='button-addon2')
+      .input-group-append
+        button#button-addon2.btn.btn-outline-primary(type='button')
+          i.fa.fa-search
+.container-fluid.gedf-wrapper
+  .row
+    .col-md-3
+      .card
+        .card-body
+          img(src="/images/33.jpg",width="200px",height="200px")
+          .h5 Fullname :  #{user.fullname}
+          .h6.text-muted  Email :  #{user.email}
+          .h7
+            | Some thing about you
+        ul.list-group.list-group-flush
+          li.list-group-item
+            .h6.text-muted Followers
+            .h5 0
+          li.list-group-item
+            .h6.text-muted Following
+            .h5 0
+    .col-md-8.gedf-main
+      .card.gedf-card
+        .card-header
+          ul#myTab.nav.nav-tabs.card-header-tabs(role='tablist')
+            li.nav-item
+              a#posts-tab.nav-link.active(data-toggle='tab', href='#posts', role='tab', aria-controls='posts', aria-selected='true')
+                | Your post in blog
+        form(action='/posts/me', method='post', enctype='multipart/form-data')
+          .card-body
+            #myTabContent.tab-content
+              #posts.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='posts-tab')
+                .form-group
+                  textarea#title.form-control(name="title",rows='2', placeholder='Title the post')
+                  .py-1
+                  textarea#content.form-control(name="content",rows='7', placeholder='Content the post')
+                  .py-1
+                  textarea#tag.form-control(name="tag",rows='1', placeholder='your tag')
+                  .py-1
+                  .form-group
+                    input#images.form-control-file(type='file',name="images")
+                .py-2
+            .btn-toolbar.justify-content-between
+              .btn-group
+                input( type="hidden" name="id" value=user.id)
+                button.btn.btn-primary(type='submit') Post
+
+      if(post)
+        each val in post
+          .card.gedf-card
+            .card-header
+              .d-flex.justify-content-between.align-items-center
+                .d-flex.justify-content-between.align-items-center
+                  .mr-2
+                    img.rounded-circle(width='45', src='https://picsum.photos/50/50', alt='')
+                  .ml-2
+                    .h5.m-0= user.fullname
+                    .h7.text-muted= user.email
+                div
+                  .dropdown
+                    button#gedf-drop1.btn.btn-link.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                      i.fa.fa-ellipsis-h
+                    .dropdown-menu.dropdown-menu-right(aria-labelledby='gedf-drop1')
+                      .h6.dropdown-header Options
+                      a.dropdown-item(href='#') Save
+                      a.dropdown-item(href='#') Hide
+                      a.dropdown-item(href='#') Report
+            .card-body
+              .text-muted.h7.mb-2
+                i.fa.fa-clock-o= val.createdAt
+              img(src="/images/11.jpg",width="100%",height="400px")
+              .py-1
+              a.card-link(href='#')
+                h5.card-title= val.title
+              p.card-text= val.content
+              div
+                span.badge.badge-primary= val.tag
+          .py-2
